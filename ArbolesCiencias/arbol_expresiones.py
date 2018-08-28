@@ -1,7 +1,6 @@
 from pila import *
 from arbol import *
 
-lista[5,2,'*',6,9,+]
 def convertir(lista, pila):
     if lista != []:
         if lista[0] in "+-*/":
@@ -24,10 +23,22 @@ def evaluar(arbol):
         return evaluar(arbol.izq) * evaluar(arbol.der)
     return int(arbol.valor)
     
-exp = raw_input("ingrese l expresion en posfija: ").split(" ")
+#exp = raw_input("ingrese l expresion en posfija: ").split(" ")
 
-pila = Pila()
+#Lectura de la cantidad de lineas que tiene el archivo
+archivo  = open("expresiones.in.txt","r")
+n = len(archivo.readlines())
+print(n)
 
-convertir(exp, pila)
+for i in archivo:
+    print i,
+"""for i in range(1,n):
+    x = archivo.readline(n)
+    linea = []
+    print (linea)
+    pila = Pila()
+    
+    for i in linea:
+        convertir(linea[i], pila)
 
-print evaluar(pila.desapilar())
+print evaluar(pila.desapilar())"""

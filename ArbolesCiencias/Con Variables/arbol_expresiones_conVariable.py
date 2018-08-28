@@ -21,7 +21,7 @@ def evaluar(arbol):
         return evaluar(arbol.izq) / evaluar(arbol.der)
     if arbol.valor == "*":
         return evaluar(arbol.izq) * evaluar(arbol.der)
-    return int(arbol.valor)
+    return int(arbol.valor,variables)
 
 pila = Pila()
  
@@ -32,7 +32,12 @@ lineas  = (fo.read().splitlines())
 for i in lineas:
     convertir(i.split(" "),pila)
     resultado = evaluar(pila.desapilar())
-    print("{} = {} ".format(i,resultado))
+
+    if type(resultado) is dict:
+            variables.update(resultado)
+    else:
+        print("variables: {}".format(variables))
+    #print("{} = {} ".format(i,resultado))
    
     fo.close()
 

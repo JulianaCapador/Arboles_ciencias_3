@@ -22,23 +22,22 @@ def evaluar(arbol):
     if arbol.valor == "*":
         return evaluar(arbol.izq) * evaluar(arbol.der)
     return int(arbol.valor)
-    
-#exp = raw_input("ingrese l expresion en posfija: ").split(" ")
 
-#Lectura de la cantidad de lineas que tiene el archivo
-archivo  = open("expresiones.in.txt","r")
-n = len(archivo.readlines())
-print(n)
+pila = Pila()
+ 
+#lectura del archivo
+fo = open("expresiones.in","r")
+lineas  = (fo.read().splitlines())
 
-for i in archivo:
-    print i,
-"""for i in range(1,n):
-    x = archivo.readline(n)
-    linea = []
-    print (linea)
-    pila = Pila()
-    
-    for i in linea:
-        convertir(linea[i], pila)
+for i in lineas:
+    convertir(i.split(" "),pila)
+    resultado = evaluar(pila.desapilar())
+    print("{} = {} ".format(i,resultado))
+   
+    fo.close()
 
-print evaluar(pila.desapilar())"""
+#Guardar resultado en el archivo
+fo = open("expresiones.out","w")
+fo.write(str(resultado)+"\n")
+fo.close()
+

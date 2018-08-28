@@ -12,7 +12,7 @@ def convertir(lista, pila):
         return convertir(lista[1:],pila)
             
 
-def evaluar(arbol):
+def evaluar(arbol,a):
     if arbol.valor == "+":
         return evaluar(arbol.izq) + evaluar(arbol.der)
     if arbol.valor == "-":
@@ -28,12 +28,16 @@ pila = Pila()
 #lectura del archivo
 fo = open("expresiones.in","r")
 lineas  = (fo.read().splitlines())
-fo = open("expresiones.out","a")
+
 for i in lineas:
     convertir(i.split(" "),pila)
-    resultado = evaluar(pila.desapilar())
+    resultado = evaluar(pila.desapilar(),variables)
     print("{} = {} ".format(i,resultado))
-    #Guardar resultado en el archivo
-    fo.write(str(resultado)+"\n")
+   
+    fo.close()
+
+#Guardar resultado en el archivo8
+fo = open("expresiones.out","w")
+fo.write(str(resultado)+"\n")
 fo.close()
-fo.close()
+
